@@ -34,3 +34,12 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+config :guardian, Guardian,
+  allowed_algos: ["HS512"], # optional
+  verify_module: Guardian.JWT,  # optional
+  issuer: "Peepchat",
+  ttl: { 30, :days },
+  verify_issuer: true, # optional
+  secret_key: System.get_env("GUARDIAN_SECRET") || "zUm4HUDX4QD58+eVQuiC5CYW1/FUY2GyctDNDvC2ntROXK/rVZi+btaHoA5yNJ6T",
+  serializer: Peepchat.GuardianSerializer
