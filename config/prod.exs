@@ -62,4 +62,12 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-import_config "prod.secret.exs"
+config :peepchat, Peepchat.Endpoint,
+  secret_key_base: System.get_env("SECRET_KEY_BASE")
+
+config :peepchat, Peepchat.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  url: System.get_env("DATABASE_URL"),
+  pool_size: 20
+
+#import_config "prod.secret.exs"
